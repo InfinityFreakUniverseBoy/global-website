@@ -1,2 +1,12 @@
 # global-website
-Global website with modern React + Next.js stack
+
+Simple Next.js website.
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Open: http://localhost:3000
