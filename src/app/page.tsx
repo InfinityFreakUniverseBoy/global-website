@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 export default function Home() {
   const localUrl = "http://localhost:3000";
   const isDevelopment = process.env.NODE_ENV === "development";
+  const hasPrivateAdminEmail = Boolean(process.env.ADMIN_EMAIL?.trim());
 
   return (
     <div className={styles.page}>
@@ -24,6 +25,11 @@ export default function Home() {
                 Run it locally at <code className={styles.code}>{localUrl}</code>.
               </>
             )}
+          </p>
+          <p>
+            {hasPrivateAdminEmail
+              ? "Private admin contact is configured."
+              : "Private admin contact is not configured yet."}
           </p>
         </div>
       </main>
