@@ -21,7 +21,7 @@ export default function Home() {
               </>
             ) : (
               <>
-                Run it locally at <span className={styles.code}>{localUrl}</span>.
+                Run it locally at <code className={styles.code}>{localUrl}</code>.
               </>
             )}
           </p>
