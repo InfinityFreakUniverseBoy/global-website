@@ -1,0 +1,25 @@
+.footer {
+  width: 100%;
+  border-top: 1px solid #ebebeb;
+  padding: 24px 60px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--foreground);
+  background: var(--background);
+}
+
+.footer a {
+  font-weight: 500;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer a:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 24px;
+  }
+}
