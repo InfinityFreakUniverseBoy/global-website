@@ -10,7 +10,7 @@ export default function Home() {
         <div className={styles.intro}>
           <h1>Global Website</h1>
           <p>A minimal website starter built with Next.js.</p>
-          <p>drobne nr coijd 50 — ale credit Coin.</p>
+          <p>drobne nr coijd 50 — ale credit Coin. Joe much coin i have.</p>
           <p>
             {isDevelopment ? (
               <>
