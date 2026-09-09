@@ -1,6 +1,9 @@
 import styles from "./page.module.css";
 
 export default function Home() {
+  const localUrl = "http://localhost:3000";
+  const isDevelopment = process.env.NODE_ENV === "development";
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -8,11 +11,19 @@ export default function Home() {
           <h1>Global Website</h1>
           <p>A minimal website starter built with Next.js.</p>
           <p>
-            Open it at{" "}
-            <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">
-              http://localhost:3000
-            </a>
-            .
+            {isDevelopment ? (
+              <>
+                Open it at{" "}
+                <a href={localUrl} target="_blank" rel="noopener noreferrer">
+                  {localUrl}
+                </a>
+                .
+              </>
+            ) : (
+              <>
+                Run it locally at <span className={styles.code}>{localUrl}</span>.
+              </>
+            )}
           </p>
         </div>
       </main>
