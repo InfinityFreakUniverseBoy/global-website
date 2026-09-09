@@ -1,17 +1,31 @@
+import { getPublicSiteUrl } from "@/lib/site-url";
 import styles from "./page.module.css";
 
 export default function Home() {
   const localUrl = "http://localhost:3000";
   const isDevelopment = process.env.NODE_ENV === "development";
+  const publicSiteUrl = getPublicSiteUrl();
 
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <div className={styles.intro}>
           <h1>Global Website</h1>
-          <p>A minimal website starter built with Next.js.</p>
-          <p>drobne nr coijd 50 — ale credit Coin. Joe much coin i have.</p>
-          <p>Nie much is people on Webcam random and open link Webside.</p>
+          <p>A clean Next.js website starter with clear local and live access links.</p>
+          {publicSiteUrl ? (
+            <p>
+              Open the live website in Google Chrome or any modern browser at{" "}
+              <a href={publicSiteUrl} target="_blank" rel="noopener noreferrer">
+                {publicSiteUrl}
+              </a>
+              .
+            </p>
+          ) : (
+            <p>
+              Add <code className={styles.code}>NEXT_PUBLIC_SITE_URL</code> to show your
+              public website link here.
+            </p>
+          )}
           <p>
             {isDevelopment ? (
               <>
