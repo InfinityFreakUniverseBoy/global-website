@@ -2,6 +2,8 @@ import styles from "./page.module.css";
 
 export default function Home() {
   const localUrl = "http://localhost:3000";
+  const internetUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://global-website.example.com";
   const isDevelopment = process.env.NODE_ENV === "development";
   const hasPrivateAdminEmail = Boolean(process.env.ADMIN_EMAIL?.trim());
 
@@ -11,6 +13,13 @@ export default function Home() {
         <div className={styles.intro}>
           <h1>Global Website</h1>
           <p>A minimal website starter built with Next.js.</p>
+          <p>
+            Find us on the internet at{" "}
+            <a href={internetUrl} target="_blank" rel="noopener noreferrer">
+              {internetUrl}
+            </a>
+            .
+          </p>
           <p>
             {isDevelopment ? (
               <>

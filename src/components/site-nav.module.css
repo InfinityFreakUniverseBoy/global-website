@@ -1,0 +1,46 @@
+.header {
+  width: 100%;
+  border-bottom: 1px solid #ebebeb;
+  background: var(--background);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px 60px;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  list-style: none;
+}
+
+.links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .links a:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    padding: 16px 24px;
+  }
+}
