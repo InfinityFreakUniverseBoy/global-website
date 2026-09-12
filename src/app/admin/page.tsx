@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { isAdminAuthenticated } from "@/lib/session";
 import styles from "../page.module.css";
@@ -19,6 +20,9 @@ export default async function AdminPage() {
         <div className={styles.intro}>
           <h1>Admin dashboard</h1>
           <p>You are signed in as admin.</p>
+          <p>
+            <Link href="/admin/wallet">Open wallet</Link>
+          </p>
           <form action={logout}>
             <button type="submit" className={styles.code}>
               Sign out

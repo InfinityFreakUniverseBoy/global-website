@@ -34,3 +34,11 @@ ADMIN_TOKEN=<your-secret-token>
 ```
 
 Then open `/admin/login`, enter the token, and you will be signed in as admin. Sessions use a signed, httpOnly cookie that expires after 8 hours.
+
+### Public app access
+
+The public `/app` page shows a QR code for the Randomeweb app landing page. Set `NEXT_PUBLIC_SITE_URL` so the QR code points to your public address.
+
+### Admin wallet
+
+After signing in as admin, open `/admin/wallet` to view admin contact details (including the configured phone number) and a QR code for the wallet page.
