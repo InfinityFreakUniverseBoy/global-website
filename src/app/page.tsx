@@ -4,6 +4,10 @@ export default function Home() {
   const localUrl = "http://localhost:3000";
   const isDevelopment = process.env.NODE_ENV === "development";
 
+  // Server-only (no NEXT_PUBLIC_ prefix) so the value is never bundled into the
+  // JavaScript sent to the browser. Configure it in .env.local (gitignored).
+  const adminPhoneNumber = process.env.ADMIN_PHONE_NUMBER;
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -27,6 +31,12 @@ export default function Home() {
               </>
             )}
           </p>
+          {adminPhoneNumber ? (
+            <div className={styles.adminContact}>
+              <h2>Admin Dębice</h2>
+              <a href={`sms:${adminPhoneNumber}`}>Send SMS to admin</a>
+            </div>
+          ) : null}
         </div>
       </main>
     </div>
