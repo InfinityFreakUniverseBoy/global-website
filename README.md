@@ -40,6 +40,17 @@ cp .env.local.example .env.local
 NEXT_PUBLIC_SITE_URL=https://webcamrandome.com
 ```
 
+### Android app link (Google Play)
+
+`NEXT_PUBLIC_PLAY_STORE_URL` sets the **Google Play** link shown on the
+homepage. It must be a valid `http`/`https` URL; when unset or invalid, the
+link is hidden. Replace the package name with the real one after publishing
+the app.
+
+```env
+NEXT_PUBLIC_PLAY_STORE_URL=https://play.google.com/store/apps/details?id=com.webcamrandome.app
+```
+
 ### Admin SMS contact (private)
 
 The homepage can show an "Admin Dębice" section with a **Send SMS to admin**

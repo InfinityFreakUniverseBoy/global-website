@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import styles from "./page.module.css";
-import { getSiteUrl } from "@/lib/site-url";
+import { getSiteUrl, getPlayStoreUrl } from "@/lib/site-url";
 
 export default async function Home() {
   const localUrl = "http://localhost:3000";
@@ -13,6 +13,7 @@ export default async function Home() {
   const networkUrl = host ? `http://${host}` : localUrl;
 
   const siteUrl = getSiteUrl();
+  const playStoreUrl = getPlayStoreUrl();
 
   // Server-only (no NEXT_PUBLIC_ prefix) so the value is never bundled into the
   // JavaScript sent to the browser. Configure it in .env.local (gitignored).
@@ -29,6 +30,15 @@ export default async function Home() {
               Visit the website at{" "}
               <a href={siteUrl} target="_blank" rel="noopener noreferrer">
                 webcamrandome.com
+              </a>
+              .
+            </p>
+          ) : null}
+          {playStoreUrl ? (
+            <p>
+              Get the Android app on{" "}
+              <a href={playStoreUrl} target="_blank" rel="noopener noreferrer">
+                Google Play
               </a>
               .
             </p>
