@@ -22,6 +22,22 @@ The dev server already listens on all network interfaces, so:
 
 In development, the homepage also shows this network URL as a clickable link.
 
+## Auto-restart on crash (production)
+
+`npm start` runs the production server through a small wrapper
+(`scripts/start-with-restart.mjs`). If the server process crashes, the
+wrapper **restarts it immediately** so the site comes back as fast as
+possible — the `.next` build cache is reused, so startup after a crash takes
+about a second.
+
+- Restarts only on failure: a clean stop (Ctrl+C, SIGTERM from a process
+  manager) shuts it down normally.
+- Gives up after 5 crashes within a minute and exits non-zero, so a real bug
+  stays visible instead of looping forever.
+- Crash/restart events are logged to `.next/server-crash.log` (gitignored).
+
+Use `npm run start:once` to run the plain `next start` without the wrapper.
+
 ## Configuration
 
 Copy `.env.local.example` to `.env.local` (gitignored) and set the values:
