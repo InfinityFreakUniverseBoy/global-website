@@ -15,6 +15,15 @@ Open: http://localhost:3000
 
 Set `NEXT_PUBLIC_SITE_URL` to your public HTTP address (e.g. `https://example.com`) to change the internet link shown on the homepage.
 
+### Admin Contact (Private)
+
+Admin contact information is kept private and configured via environment variables:
+
+- `ADMIN_EMAIL` - Admin email address (not exposed publicly)
+- `ADMIN_PHONE_NUMBER` - Admin phone number for SMS contact (server-only, not exposed to client)
+
+These should be configured in `.env.local` (which is ignored by git). See `.env.local.example` for the required variables.
+
 ## Admin access
 
 Set `ADMIN_TOKEN` (e.g. in `.env.local`) to a long random secret to enable the admin area:
