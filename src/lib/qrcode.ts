@@ -10,6 +10,7 @@ export async function generateQRCode(data: string): Promise<string> {
   });
 }
 
+/** Returns the configured public site URL, treating blank values as unset and removing one trailing slash. */
 export function getPublicSiteUrl(): string {
   const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   return configuredSiteUrl
