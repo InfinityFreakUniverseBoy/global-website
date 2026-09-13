@@ -56,7 +56,13 @@ export default function QRCodeScanner() {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
       try {
-        const BarcodeDetector = (window as unknown as { BarcodeDetector?: typeof BarcodeDetector }).BarcodeDetector;
+        interface BarcodeDetectorInstance {
+          detect(source: HTMLCanvasElement): Promise<{ rawValue: string }[]>;
+        }
+        interface BarcodeDetectorConstructor {
+          new (options: { formats: string[] }): BarcodeDetectorInstance;
+        }
+        const BarcodeDetector = (window as unknown as { BarcodeDetector?: BarcodeDetectorConstructor }).BarcodeDetector;
         if (BarcodeDetector) {
           const detector = new BarcodeDetector({ formats: ["qr_code"] });
           const codes = await detector.detect(canvas);
