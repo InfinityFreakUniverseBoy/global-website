@@ -17,7 +17,7 @@ export default async function AdminWalletPage() {
     redirect("/admin/login");
   }
 
-  const adminPhoneNumber = process.env.ADMIN_PHONE_NUMBER?.trim();
+  const adminPhoneNumber = process.env.ADMIN_PHONE_NUMBER?.trim() || undefined;
   const adminPhoneLink = adminPhoneNumber?.replace(/(?!^\+)\D/g, "");
   const walletUrl = getPublicUrl("/admin/wallet");
   const qrCode = await generateQRCode(walletUrl);
