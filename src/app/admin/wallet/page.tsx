@@ -18,7 +18,10 @@ export default async function AdminWalletPage() {
   }
 
   const adminPhoneNumber = process.env.ADMIN_PHONE_NUMBER?.trim() || undefined;
-  const adminPhoneLink = adminPhoneNumber?.replace(/(?!^\+)\D/g, "");
+  const adminPhoneDigits = adminPhoneNumber?.replace(/\D/g, "");
+  const adminPhoneLink = adminPhoneDigits
+    ? `${adminPhoneNumber?.startsWith("+") ? "+" : ""}${adminPhoneDigits}`
+    : undefined;
   const walletUrl = getPublicUrl("/admin/wallet");
   const qrCode = await generateQRCode(walletUrl);
 
