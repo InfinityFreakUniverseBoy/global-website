@@ -10,6 +10,19 @@ export const metadata = {
   description: "Admin wallet and contact information",
 };
 
+function getAdminPhoneLink(phoneNumber: string | undefined): string | undefined {
+  if (!phoneNumber) return undefined;
+
+  const normalizedPhoneNumber = phoneNumber
+    .replace(/\s+/g, "")
+    .replace(/(?!^)\+/g, "");
+
+  return /^[+0-9A-Za-z().,*#;=-]+$/.test(normalizedPhoneNumber) &&
+    /\d/.test(normalizedPhoneNumber)
+    ? normalizedPhoneNumber
+    : undefined;
+}
+
 export default async function AdminWalletPage() {
   await connection();
 
@@ -18,10 +31,7 @@ export default async function AdminWalletPage() {
   }
 
   const adminPhoneNumber = process.env.ADMIN_PHONE_NUMBER?.trim() || undefined;
-  const adminPhoneDigits = adminPhoneNumber?.replace(/\D/g, "");
-  const adminPhoneLink = adminPhoneDigits
-    ? `${adminPhoneNumber?.startsWith("+") ? "+" : ""}${adminPhoneDigits}`
-    : undefined;
+  const adminPhoneLink = getAdminPhoneLink(adminPhoneNumber);
   const walletUrl = getPublicUrl("/admin/wallet");
   const qrCode = await generateQRCode(walletUrl);
 
