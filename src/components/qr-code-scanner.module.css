@@ -1,0 +1,27 @@
+.scanner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 440px;
+}
+
+.video {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 12px;
+  background: #000;
+}
+
+.canvas {
+  display: none;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+.result a {
+  word-break: break-all;
+  color: var(--text-primary);
+  font-weight: 500;
+}

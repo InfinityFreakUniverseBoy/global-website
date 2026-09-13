@@ -1,16 +1,12 @@
-import Image from "next/image";
 import styles from "../page.module.css";
-import { generateQRCode, getPublicUrl } from "@/lib/qrcode";
+import QRCodeSection from "@/components/qr-code-section";
 
 export const metadata = {
   title: "Randomeweb App — Global Website",
   description: "Download the Randomeweb app",
 };
 
-export default async function AppPage() {
-  const appUrl = getPublicUrl("/app");
-  const qrCode = await generateQRCode(appUrl);
-
+export default function AppPage() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -19,19 +15,7 @@ export default async function AppPage() {
           <p>
             Access the app by scanning the QR code or visiting the link below.
           </p>
-          <p>
-            App link:{" "}
-            <a href={appUrl} target="_blank" rel="noopener noreferrer">
-              {appUrl}
-            </a>
-          </p>
-          <Image
-            src={qrCode}
-            alt="QR code for Randomeweb app"
-            width={256}
-            height={256}
-            unoptimized
-          />
+          <QRCodeSection path="/app" label="App page QR code" imageSrc="/vercel.svg" imageAlt="Vercel logo" />
         </div>
       </main>
     </div>

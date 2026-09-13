@@ -1,7 +1,6 @@
-import Image from "next/image";
 import { redirect } from "next/navigation";
 import { isAdminAuthenticated } from "@/lib/session";
-import { generateQRCode, getPublicUrl } from "@/lib/qrcode";
+import QRCodeSection from "@/components/qr-code-section";
 import styles from "../../page.module.css";
 
 export const metadata = {
@@ -14,9 +13,6 @@ export default async function AdminWalletPage() {
     redirect("/admin/login");
   }
 
-  const walletUrl = getPublicUrl("/admin/wallet");
-  const qrCode = await generateQRCode(walletUrl);
-
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -27,18 +23,11 @@ export default async function AdminWalletPage() {
             Phone:{" "}
             <a href="tel:+48514404306">+48 514 404 306</a>
           </p>
-          <p>
-            Wallet page link:{" "}
-            <a href={walletUrl} target="_blank" rel="noopener noreferrer">
-              {walletUrl}
-            </a>
-          </p>
-          <Image
-            src={qrCode}
-            alt="QR code for admin wallet page"
-            width={256}
-            height={256}
-            unoptimized
+          <QRCodeSection
+            path="/admin/wallet"
+            label="Admin wallet QR code"
+            imageSrc="/vercel.svg"
+            imageAlt="Vercel logo"
           />
         </div>
       </main>

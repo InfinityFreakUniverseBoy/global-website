@@ -1,4 +1,5 @@
 import styles from "../page.module.css";
+import QRCodeSection from "@/components/qr-code-section";
 
 export const metadata = {
   title: "About — Global Website",
@@ -19,6 +20,7 @@ export default function About() {
             This site is statically generated and can be deployed to any static
             host or run locally with Node.js.
           </p>
+          <QRCodeSection path="/about" label="About page QR code" imageSrc="/file.svg" imageAlt="File icon" />
         </div>
       </main>
     </div>

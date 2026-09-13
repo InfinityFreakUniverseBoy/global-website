@@ -1,4 +1,5 @@
 import styles from "../page.module.css";
+import QRCodeSection from "@/components/qr-code-section";
 
 export const metadata = {
   title: "Contact — Global Website",
@@ -21,6 +22,7 @@ export default function Contact() {
               {internetUrl}
             </a>
           </p>
+          <QRCodeSection path="/contact" label="Contact page QR code" imageSrc="/window.svg" imageAlt="Window icon" />
         </div>
       </main>
     </div>
