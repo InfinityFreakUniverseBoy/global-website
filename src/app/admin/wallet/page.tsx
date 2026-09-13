@@ -18,6 +18,7 @@ export default async function AdminWalletPage() {
   }
 
   const adminPhoneNumber = process.env.ADMIN_PHONE_NUMBER?.trim();
+  const adminPhoneLink = adminPhoneNumber?.replace(/(?!^\+)\D/g, "");
   const walletUrl = getPublicUrl("/admin/wallet");
   const qrCode = await generateQRCode(walletUrl);
 
@@ -29,8 +30,8 @@ export default async function AdminWalletPage() {
           <p>Private admin access and contact details.</p>
           <p>
             Phone:{" "}
-            {adminPhoneNumber ? (
-              <a href={`tel:${adminPhoneNumber}`}>{adminPhoneNumber}</a>
+            {adminPhoneNumber && adminPhoneLink ? (
+              <a href={`tel:${adminPhoneLink}`}>{adminPhoneNumber}</a>
             ) : (
               "Not configured."
             )}
