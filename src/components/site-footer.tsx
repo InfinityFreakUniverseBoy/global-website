@@ -1,8 +1,8 @@
 import styles from "./site-footer.module.css";
+import { getPublicSiteUrl } from "@/lib/qrcode";
 
 export default function SiteFooter() {
-  const internetUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://global-website.example.com";
+  const internetUrl = getPublicSiteUrl();
 
   return (
     <footer className={styles.footer}>

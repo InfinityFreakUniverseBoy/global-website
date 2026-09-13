@@ -16,8 +16,9 @@ export default function About() {
             serves as a simple home on the internet with a public HTTP address.
           </p>
           <p>
-            This site is statically generated and can be deployed to any static
-            host or run locally with Node.js.
+            The public pages can be statically generated and deployed to a
+            static host, while the token-protected admin area requires a
+            server-capable Node.js deployment for login and cookie validation.
           </p>
         </div>
       </main>

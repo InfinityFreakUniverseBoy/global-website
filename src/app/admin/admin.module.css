@@ -9,7 +9,7 @@
 .label {
   font-size: 14px;
   font-weight: 500;
-  color: var(--foreground);
+  color: var(--text-primary);
 }
 
 .input {
@@ -18,8 +18,8 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--foreground);
+  color: var(--text-primary);
 }
 
 .button {
@@ -27,8 +27,8 @@
   padding: 0 16px;
   border: none;
   border-radius: 128px;
-  background: var(--foreground);
-  color: var(--background);
+  background: var(--text-primary);
+  color: var(--foreground);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -42,5 +42,5 @@
 
 .error {
   font-size: 14px;
-  color: #c00;
+  color: #d32f2f;
 }

@@ -5,11 +5,22 @@ export const SESSION_COOKIE = "admin_session";
 const SESSION_MAX_AGE_SECONDS = 60 * 60 * 8; // 8 hours
 
 function getAdminToken(): string | undefined {
-  return process.env.ADMIN_TOKEN;
+  const adminToken = process.env.ADMIN_TOKEN?.trim();
+  return adminToken || undefined;
 }
 
-function sign(payload: string): string {
-  return createHmac("sha256", getAdminToken() ?? "").update(payload).digest("hex");
+function requireAdminToken(): string {
+  const adminToken = getAdminToken();
+
+  if (!adminToken) {
+    throw new Error("ADMIN_TOKEN is not configured.");
+  }
+
+  return adminToken;
+}
+
+function sign(payload: string, adminToken: string): string {
+  return createHmac("sha256", adminToken).update(payload).digest("hex");
 }
 
 function safeEqual(a: string, b: string): boolean {
@@ -25,9 +36,10 @@ export function isValidAdminToken(token: string): boolean {
 }
 
 export async function createAdminSession(): Promise<void> {
+  const adminToken = requireAdminToken();
   const expiresAt = Date.now() + SESSION_MAX_AGE_SECONDS * 1000;
   const payload = `admin.${expiresAt}`;
-  const value = `${payload}.${sign(payload)}`;
+  const value = `${payload}.${sign(payload, adminToken)}`;
   const cookieStore = await cookies();
 
   cookieStore.set(SESSION_COOKIE, value, {
@@ -45,6 +57,9 @@ export async function deleteAdminSession(): Promise<void> {
 }
 
 export async function isAdminAuthenticated(): Promise<boolean> {
+  const adminToken = getAdminToken();
+  if (!adminToken) return false;
+
   const cookieStore = await cookies();
   const value = cookieStore.get(SESSION_COOKIE)?.value;
   if (!value) return false;
@@ -59,5 +74,5 @@ export async function isAdminAuthenticated(): Promise<boolean> {
   if (!Number.isFinite(expiresAt) || expiresAt < Date.now()) return false;
 
   const payload = `${role}.${expiresAtRaw}`;
-  return safeEqual(signature, sign(payload));
+  return safeEqual(signature, sign(payload, adminToken));
 }
