@@ -1,9 +1,9 @@
 import styles from "./page.module.css";
+import { getPublicSiteUrl } from "@/lib/qrcode";
 
 export default function Home() {
   const localUrl = "http://localhost:3000";
-  const internetUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://global-website.example.com";
+  const internetUrl = getPublicSiteUrl();
   const isDevelopment = process.env.NODE_ENV === "development";
 
   return (

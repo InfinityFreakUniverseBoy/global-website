@@ -23,7 +23,11 @@ export default function LoginForm() {
         autoComplete="current-password"
         className={styles.input}
       />
-      {state?.error ? <p className={styles.error}>{state.error}</p> : null}
+      {state?.error ? (
+        <p role="alert" className={styles.error}>
+          {state.error}
+        </p>
+      ) : null}
       <button type="submit" disabled={pending} className={styles.button}>
         {pending ? "Signing in…" : "Sign in"}
       </button>

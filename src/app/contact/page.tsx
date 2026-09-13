@@ -1,4 +1,5 @@
 import styles from "../page.module.css";
+import { getPublicSiteUrl } from "@/lib/qrcode";
 
 export const metadata = {
   title: "Contact — Global Website",
@@ -6,8 +7,7 @@ export const metadata = {
 };
 
 export default function Contact() {
-  const internetUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://global-website.example.com";
+  const internetUrl = getPublicSiteUrl();
 
   return (
     <div className={styles.page}>

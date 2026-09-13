@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { isAdminAuthenticated } from "@/lib/session";
 import { generateQRCode, getPublicUrl } from "@/lib/qrcode";
 import styles from "../../page.module.css";
@@ -9,11 +10,28 @@ export const metadata = {
   description: "Admin wallet and contact information",
 };
 
+function getAdminPhoneLink(phoneNumber: string | undefined): string | undefined {
+  if (!phoneNumber) return undefined;
+
+  const normalizedPhoneNumber = phoneNumber
+    .replace(/\s+/g, "")
+    .replace(/(?!^)\+/g, "");
+
+  return /^[+0-9A-Za-z().,*#;=-]+$/.test(normalizedPhoneNumber) &&
+    /\d/.test(normalizedPhoneNumber)
+    ? normalizedPhoneNumber
+    : undefined;
+}
+
 export default async function AdminWalletPage() {
+  await connection();
+
   if (!(await isAdminAuthenticated())) {
     redirect("/admin/login");
   }
 
+  const adminPhoneNumber = process.env.ADMIN_PHONE_NUMBER?.trim() || undefined;
+  const adminPhoneLink = getAdminPhoneLink(adminPhoneNumber);
   const walletUrl = getPublicUrl("/admin/wallet");
   const qrCode = await generateQRCode(walletUrl);
 
@@ -25,7 +43,11 @@ export default async function AdminWalletPage() {
           <p>Private admin access and contact details.</p>
           <p>
             Phone:{" "}
-            <a href="tel:+48514404306">+48 514 404 306</a>
+            {adminPhoneNumber && adminPhoneLink ? (
+              <a href={`tel:${adminPhoneLink}`}>{adminPhoneNumber}</a>
+            ) : (
+              "Not configured."
+            )}
           </p>
           <p>
             Wallet page link:{" "}

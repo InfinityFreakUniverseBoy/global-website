@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { isAdminAuthenticated } from "@/lib/session";
 import styles from "../../page.module.css";
 import LoginForm from "./login-form";
@@ -9,6 +10,8 @@ export const metadata = {
 };
 
 export default async function AdminLoginPage() {
+  await connection();
+
   if (await isAdminAuthenticated()) {
     redirect("/admin");
   }
