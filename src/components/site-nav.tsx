@@ -16,6 +16,11 @@ export default function SiteNav() {
             <Link href="/about">About</Link>
           </li>
           <li>
+            <Link href="/debice" aria-label="Dębice">
+              Debice
+            </Link>
+          </li>
+          <li>
             <Link href="/contact">Contact</Link>
           </li>
         </ul>
